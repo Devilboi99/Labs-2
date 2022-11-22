@@ -62,3 +62,7 @@
 ## Powered by
 
 **BigDigital Team: Denisov | Fadeev | Panov**
+
+```css
+    Console.Log("hello world");
+```
