@@ -117,21 +117,12 @@ public class NewBehaviourScript : MonoBehaviour
 }
 
 ```
-- научить работь его с and (Ему потербовалась в среднем больше попыток, чтоб понять как работает and)
-![alt text](https://github.com/Devilboi99/Labs-4/blob/master/изображение_2022-11-21_150908044.png)
-- научить работать с nand (в среднем работает так же как и and)
-![alt text](https://github.com/Devilboi99/Labs-4/blob/master/изображение_2022-11-21_151303532.png)
-- научить работать с xor 
-![alt text](https://github.com/Devilboi99/Labs-4/blob/master/изображение_2022-11-21_152122564.png)
-Как было сказано в лекций, парцетрон не может обучиться на не линейных операция, собственно, видно, что он это и не может (было 500 тренировок)
 
 ## Выводы
-понял, что такое парцентрон: его минусы, зачем он нужен и как его использовать.
+научился, работать с данными в таблицы Google sheets: ввод данных и ввывод данных, через python и unity
 
 ## Powered by
 
 **BigDigital Team: Denisov | Fadeev | Panov**
 
-```css
-    Console.Log("hello world");
-```
+
