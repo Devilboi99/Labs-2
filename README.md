@@ -55,7 +55,7 @@
 4. использовать эти данные в проете unity
      ![alt text](https://github.com/Devilboi99/Labs-2/blob/master/Unity%20работа%20голоса.jpg)
      ```css
-    using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
