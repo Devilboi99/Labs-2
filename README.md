@@ -55,7 +55,73 @@
 4. использовать эти данные в проете unity
      ![alt text](https://github.com/Devilboi99/Labs-2/blob/master/Unity%20работа%20голоса.jpg)
      ```css
-    Console.Log("hello world");
+    using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Networking;
+using SimpleJSON;
+
+public class NewBehaviourScript : MonoBehaviour
+{
+    public AudioClip goodSpeak;
+    public AudioClip normalSpeak;
+    public AudioClip badSpeak;
+    private AudioSource selectAudio;
+    private Dictionary<string,float> dataSet = new Dictionary<string, float>();
+    private bool statusStart = false;
+    private int i = 1;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        StartCoroutine(GoogleSheets());
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (statusStart || i == dataSet.Count)
+            return;
+        
+        if (dataSet["Mon_" + i.ToString()] <= 10 )
+            StartCoroutine(PlaySelectAudio(goodSpeak));
+        
+        if (dataSet["Mon_" + i.ToString()] > 10 && dataSet["Mon_" + i.ToString()] < 100)
+            StartCoroutine(PlaySelectAudio(normalSpeak));
+        
+        if (dataSet["Mon_" + i.ToString()] >= 100)
+            StartCoroutine(PlaySelectAudio(badSpeak));
+        
+        
+        Debug.Log(dataSet["Mon_" + i.ToString()]);
+    }
+
+    IEnumerator GoogleSheets()
+    {
+        UnityWebRequest curentResp = UnityWebRequest.Get("https://sheets.googleapis.com/v4/spreadsheets/1KFYtu94ek1KHm5P0GMD-CqJtNClE99yCFGe-795-EGE/values/Лист1?key=AIzaSyAZc30RVQXbXiDVHAqL65aCNip5CPEbPJU");
+        yield return curentResp.SendWebRequest();
+        var rawResp = curentResp.downloadHandler.text;
+        var rawJson = JSON.Parse(rawResp);
+        foreach (var itemRawJson in rawJson["values"])
+        {
+            var parseJson = JSON.Parse(itemRawJson.ToString());
+            var selectRow = parseJson[0].AsStringList;
+            dataSet.Add(("Mon_" + selectRow[0]), float.Parse(selectRow[3]));   // здесь я до этого накосячил с таблицей поэтому в 4 элементе данные
+        }
+    }
+
+    IEnumerator PlaySelectAudio(AudioClip typeSpeak)
+    {
+        statusStart = true;
+        selectAudio = GetComponent<AudioSource>();
+        selectAudio.clip = typeSpeak;
+        selectAudio.Play();
+        yield return new WaitForSeconds(3);
+        statusStart = false;
+        i++;
+    }
+}
+
 ```
 - научить работь его с and (Ему потербовалась в среднем больше попыток, чтоб понять как работает and)
 ![alt text](https://github.com/Devilboi99/Labs-4/blob/master/изображение_2022-11-21_150908044.png)
